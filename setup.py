@@ -13,10 +13,10 @@ if sys.platform == 'darwin':
     from distutils import sysconfig
     vars = sysconfig.get_config_vars()
     vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-shared')
-    extra_link_args = ['-L/usr/local/lib',
+    extra_link_args = ['-L/usr/local/lib', '-L/opt/local/lib/',
                        '-Wl,-install_name,@rpath/liborbit' + suffix]
 else:
-    extra_link_args = ['-L/usr/local/lib']
+    extra_link_args = ['-L/usr/local/lib', '-L/opt/local/lib/']
 liborbitmodule = Extension('liborbit',
                            sources=glob.glob('rebound/src/*.c') +
                            ['ttv_devil/orbit.c'],
